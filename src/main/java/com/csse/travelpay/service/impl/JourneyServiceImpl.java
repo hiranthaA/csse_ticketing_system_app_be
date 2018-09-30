@@ -57,4 +57,13 @@ public class JourneyServiceImpl implements JourneyService{
 		}
 	}
 
+	@Override
+	public Journey getOnboardCust(String cid) {
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
+		MongoOperations mongoOperation =  (MongoOperations) ctx.getBean("mongoTemplate");
+		Query query = new Query();
+		query.addCriteria(Criteria.where("passengerId").is(cid).and("jstatus").is("onboard"));
+		return mongoOperation.findOne(query, Journey.class);
+	}
+
 }

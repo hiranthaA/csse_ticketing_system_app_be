@@ -31,5 +31,10 @@ public class JourneyController {
 		System.out.println(cid+ " " +status);
 		return journeyservice.getJourneyList(cid,status);
 	}
+	
+	@RequestMapping(value="/getonboardcust",method=RequestMethod.GET)
+	public Journey getOnboardCust(@RequestParam String cid){
+		return journeyservice.getOnboardCust(cid);
+	}
 
 }
