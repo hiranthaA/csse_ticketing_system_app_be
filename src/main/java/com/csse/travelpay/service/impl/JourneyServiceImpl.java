@@ -3,11 +3,14 @@ package com.csse.travelpay.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.csse.travelpay.config.MongoConfig;
 import com.csse.travelpay.model.Journey;
 import com.csse.travelpay.repository.JourneyRepository;
 import com.csse.travelpay.service.JourneyService;
@@ -32,7 +35,11 @@ public class JourneyServiceImpl implements JourneyService{
 			if(cid!=null && status!=null) {
 				//journey list of specific customer with given status
 				System.out.println(cid+ " " +status);
-				return null;
+				ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
+				MongoOperations mongoOperation =  (MongoOperations) ctx.getBean("mongoTemplate");
+				Query query = new Query();
+				query.addCriteria(Criteria.where("passengerId").is(cid).and("jstatus").is(status));
+				return mongoOperation.find(query, Journey.class);
 			}
 			else if(cid!=null){
 				//journey list of specific customer
