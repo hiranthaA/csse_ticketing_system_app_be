@@ -66,4 +66,9 @@ public class JourneyServiceImpl implements JourneyService{
 		return mongoOperation.findOne(query, Journey.class);
 	}
 
+	@Override
+	public Journey getJourneyById(String jid) {
+		return journeyrepo.findOneByJourneyId(jid);
+	}
+
 }
