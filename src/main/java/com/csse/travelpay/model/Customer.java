@@ -17,7 +17,22 @@ public class Customer {
 	private int mobile;
 	private String password;
 	private double balance;
+	private String customerType;
+	private Date expDate;
 	
+	
+	public Date getExpDate() {
+		return expDate;
+	}
+	public void setExpDate(Date expDate) {
+		this.expDate = expDate;
+	}
+	public String getCustomerType() {
+		return customerType;
+	}
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
+	}
 	public double getBalance() {
 		return balance;
 	}
