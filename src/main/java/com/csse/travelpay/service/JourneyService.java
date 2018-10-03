@@ -9,4 +9,5 @@ public interface JourneyService {
 	Journey addJourney(Journey j);
 	List<Journey> getJourneyList(String cid,String status);
 	Journey getOnboardCust(String cid);
+	Journey getJourneyById(String jid);
 }
