@@ -14,7 +14,7 @@ public class Customer {
 	private String fname;
 	private String lname;
 	private Date dob;
-	private int mobile;
+	private String mobile;
 	private String password;
 	private double balance;
 	private String customerType;
@@ -63,10 +63,10 @@ public class Customer {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 	public String getPassword() {
