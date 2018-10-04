@@ -8,7 +8,7 @@ public class Account {
     @Id
     private String accountId;
     
-    private int accountNo;
+    private String accountNo;
     private double accountQuantity;
     private String passengerId; 
     private String phoneNo;
@@ -24,14 +24,14 @@ public class Account {
     /**
      * @return the accountNo
      */
-    public int getAccountNo() {
+    public String getAccountNo() {
         return accountNo;
     }
 
     /**
      * @param accountNo the accountNo to set
      */
-    public void setAccountNo(int accountNo) {
+    public void setAccountNo(String accountNo) {
         this.accountNo = accountNo;
     }
 
