@@ -1,10 +1,12 @@
 package com.csse.travelpay.controller;
 
+import com.csse.travelpay.dto.FareListUpdateRequest;
 import com.csse.travelpay.model.BusRoute;
 import com.csse.travelpay.model.FareList;
 import com.csse.travelpay.model.Journey;
 import com.csse.travelpay.service.JourneyService;
 import com.csse.travelpay.service.RouteService;
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +26,12 @@ public class RouteController {
 	}
 	
 	@RequestMapping(value="/getAll",method=RequestMethod.GET)
-	public List<BusRoute> getJourneyList(){
+	public List<BusRoute> getRoutes(){
 		return routeService.getRouteList();
 	}
 	
 	@RequestMapping(value="/getAllActive",method=RequestMethod.GET)
-	public List<BusRoute> getOnboardCust(){
+	public List<BusRoute> getAllActiveRoutes(){
 		return routeService.getActiveRouteList();
 	}
 
@@ -39,7 +41,12 @@ public class RouteController {
 	}
 
 	@RequestMapping(value="/getFareList",method=RequestMethod.POST)
-	public FareList addRoute(@RequestBody FareList list){
+	public FareList getFareList(@RequestBody FareList list){
 		return routeService.getFareList(list);
+	}
+
+	@RequestMapping(value="/updateFareList",method=RequestMethod.POST)
+	public FareList updateFareList(@RequestBody FareListUpdateRequest request){
+		return routeService.updateFareList(request);
 	}
 }
