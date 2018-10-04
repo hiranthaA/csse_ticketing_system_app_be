@@ -40,6 +40,14 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
 
     @Override
     public Account addAccount(Account j) {
+        Account existing = accountRepo.findAccountByPassengerId(j.getPassengerId());
+        if(existing!=null){
+            existing.setAccountNo(j.getAccountNo());
+            if(j.getCardNo()!="")
+                existing.setCardNo(j.getCardNo());
+            existing.setPhoneNo(j.getPhoneNo());
+            j=existing;
+        }
         return accountRepo.save(j);
     }
 
