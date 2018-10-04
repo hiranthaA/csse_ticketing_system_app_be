@@ -19,8 +19,30 @@ public class Customer {
 	private double balance;
 	private String customerType;
 	private Date expDate;
+	private String passport;
+	private String nicorpassport;
+	private String nic;
 	
 	
+	public String getNic() {
+		return nic;
+	}
+	public void setNic(String nic) {
+		this.nic = nic;
+	}
+	public String getPassport() {
+		return passport;
+	}
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+	
+	public String getNicorpassport() {
+		return nicorpassport;
+	}
+	public void setNicorpassport(String nicorpassport) {
+		this.nicorpassport = nicorpassport;
+	}
 	public Date getExpDate() {
 		return expDate;
 	}

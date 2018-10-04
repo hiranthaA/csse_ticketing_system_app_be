@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getUser(String id) {
 		// TODO Auto-generated method stub
-		return custrepo.findOneById(id);
+		return custrepo.findOneByNicorpassport(id);
 	}
 
 	
