@@ -40,15 +40,18 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
 
     @Override
     public Account addAccount(Account j) {
-        Account existing = accountRepo.findAccountByPassengerId(j.getPassengerId());
-        if(existing!=null){
-            existing.setAccountNo(j.getAccountNo());
-            if(j.getCardNo()!="")
-                existing.setCardNo(j.getCardNo());
-            existing.setPhoneNo(j.getPhoneNo());
-            j=existing;
+
+    	Account exists = accountRepo.findAccountByPassengerId(j.getPassengerId());
+        if(exists!=null) {
+        	if(exists.getAccountQuantity()==0)
+        		exists.setAccountQuantity(j.getAccountQuantity());
+        	if(j.getCardNo()!=""||j.getCardNo()!=null)
+        		exists.setCardNo(j.getCardNo());
+        	exists.setPhoneNo(j.getPhoneNo());
+        	j=exists;
         }
-        return accountRepo.save(j);
+    	return accountRepo.save(j);
+
     }
 
     @Override
@@ -58,10 +61,10 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
 
     @Override
     public Account getAccountByPassengerIdOrAccountId(String passID, String accId) {
-        if(accId!=""&&passID!=""){
-            return accountRepo.findAccountByPassengerIdAndAccountId(passID, accId);
-        }
-        if(accId!="")
+//        if(accId!=passID){
+//            return accountRepo.findAccountByPassengerIdAndAccountId(passID, accId);
+//        }
+        if(accId!=""&&accId!=passID)
             return accountRepo.findAccountByAccountId(accId);
         else
             return accountRepo.findAccountByPassengerId(passID);
