@@ -42,7 +42,8 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
     public Account addAccount(Account j) {
     	Account exists = accountRepo.findAccountByPassengerId(j.getPassengerId());
         if(exists!=null) {
-        	exists.setAccountQuantity(exists.getAccountQuantity()+j.getAccountQuantity());
+        	if(exists.getAccountQuantity()==0)
+        		exists.setAccountQuantity(j.getAccountQuantity());
         	if(j.getCardNo()!=""||j.getCardNo()!=null)
         		exists.setCardNo(j.getCardNo());
         	exists.setPhoneNo(j.getPhoneNo());
