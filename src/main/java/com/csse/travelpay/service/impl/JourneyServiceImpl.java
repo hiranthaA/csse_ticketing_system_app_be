@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.csse.travelpay.config.MongoConfig;
+import com.csse.travelpay.config.MongoConnection;
 import com.csse.travelpay.model.Journey;
 import com.csse.travelpay.repository.JourneyRepository;
 import com.csse.travelpay.service.JourneyService;
@@ -35,11 +36,9 @@ public class JourneyServiceImpl implements JourneyService{
 			if(cid!=null && status!=null) {
 				//journey list of specific customer with given status
 				System.out.println(cid+ " " +status);
-				ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
-				MongoOperations mongoOperation =  (MongoOperations) ctx.getBean("mongoTemplate");
 				Query query = new Query();
 				query.addCriteria(Criteria.where("passengerId").is(cid).and("jstatus").is(status));
-				return mongoOperation.find(query, Journey.class);
+				return MongoConnection.getInstance().getMongoOperation().find(query, Journey.class);
 			}
 			else if(cid!=null){
 				//journey list of specific customer
@@ -59,11 +58,9 @@ public class JourneyServiceImpl implements JourneyService{
 
 	@Override
 	public Journey getOnboardCust(String cid) {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
-		MongoOperations mongoOperation =  (MongoOperations) ctx.getBean("mongoTemplate");
 		Query query = new Query();
 		query.addCriteria(Criteria.where("passengerId").is(cid).and("jstatus").is("onboard"));
-		return mongoOperation.findOne(query, Journey.class);
+		return MongoConnection.getInstance().getMongoOperation().findOne(query, Journey.class);
 	}
 
 	@Override
