@@ -127,7 +127,7 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
     public boolean sendSMS(int code,int phoneno){
         boolean messageStatus = false;
         Message message = Message.creator(new PhoneNumber("+94"+phoneno), new PhoneNumber("+1 860 615 3924"),
-                            ". \n\n\nYour Code is: "+code+"\n\nPlease enter this code in your travelpay app.").create();
+                            ". \n\n\nYour Code is: "+code+"\n\nPlease enter this code in your Travel Pay app.").create();
 
 
         String status = message.getStatus().toString();
