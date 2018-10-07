@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Bus {
 	@Id
 	private String busId;
-	private int routeNo;
+	private String routeNo;
 	private int currentLocation;
 	private String password;
 	public String getBusId() {
@@ -16,10 +16,10 @@ public class Bus {
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
-	public int getRouteNo() {
+	public String getRouteNo() {
 		return routeNo;
 	}
-	public void setRouteNo(int routeNo) {
+	public void setRouteNo(String routeNo) {
 		this.routeNo = routeNo;
 	}
 	public int getCurrentLocation() {
