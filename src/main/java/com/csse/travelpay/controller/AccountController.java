@@ -57,7 +57,7 @@ public class AccountController {
 		return accountService.sendSMSValidation(acc);
     }
     @RequestMapping(value="/recharge/{code}",method=RequestMethod.POST)
-	public Account sendMessage(@RequestBody Account acc,@PathVariable("code") String code){
+	public Account verifyCode(@RequestBody Account acc,@PathVariable("code") String code){
 		return accountService.validate(code,acc);
     }
 

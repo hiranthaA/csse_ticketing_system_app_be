@@ -50,7 +50,11 @@ public class AccountControllerTests extends TravelpayApplicationTests{
 
     Account account = new Account();
     
+    private static double amountInitial = 200;
+    private static double amountAfterRecharge = 400;
     private static String passenngerId = "941234567v";
+    private static String mobile = "0767590028";
+    
     JSONObject json;
     
     @Autowired
@@ -72,7 +76,7 @@ public class AccountControllerTests extends TravelpayApplicationTests{
     public void addAccountTest() throws Exception{
 
 		account.setPassengerId(passenngerId);
-        account.setAccountQuantity(200);    	
+        account.setAccountQuantity(amountInitial);    	
 		this.mockMvc.perform(post("/accounts/add")
 		                    .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(account)))
@@ -91,12 +95,12 @@ public class AccountControllerTests extends TravelpayApplicationTests{
    @Test
    public void getAccountByIdTest() throws Exception{
         account.setPassengerId(passenngerId );
-        account.setAccountQuantity(200);
+        account.setAccountQuantity(amountInitial);
         this.mockMvc.perform(get("/accounts/getbyid/?id="+passenngerId)).andDo(print())
                    .andExpect(status().isOk())
                    .andExpect(content().contentType("application/json;charset=UTF-8"))
-                   .andExpect(jsonPath("$.passengerId").value("941234567v"))
-                   .andExpect(jsonPath("$.accountQuantity").value(200));
+                   .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
+                   .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
    }
    
   
@@ -112,16 +116,16 @@ public class AccountControllerTests extends TravelpayApplicationTests{
 //    public void sendMessageTest() throws Exception{
 //        
 //        account.setPassengerId(passenngerId);
-//        account.setAccountQuantity(200);
-//        account.setPhoneNo("0767590028");
+//        account.setAccountQuantity(amountInitial);
+//        account.setPhoneNo(mobile);
 //        this.mockMvc.perform(post("/accounts/sendSMS")
 //                     .contentType(MediaType.APPLICATION_JSON)
 //                     .content(objectMapper.writeValueAsString(account)))
 //                     .andDo(print())
 //                     .andExpect(status().isOk())
 //                     .andExpect(content().contentType("application/json;charset=UTF-8"))
-//                     .andExpect(jsonPath("$.passengerId").value("941234567v"))
-//                     .andExpect(jsonPath("$.accountQuantity").value(200));
+//                     .andExpect(jsonPath("$.passengerId").value(passenngerId))
+//                     .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
 //    }
  
      /**
@@ -133,7 +137,7 @@ public class AccountControllerTests extends TravelpayApplicationTests{
     public void verifyCodeTest() throws Exception{
         Account account2 =new Account();
         account.setPassengerId(passenngerId);
-        account.setAccountQuantity(200);
+        account.setAccountQuantity(amountInitial);
         account.setPhoneNo("0767590028");
         this.mockMvc.perform(post("/accounts/recharge/1234")
                      .contentType(MediaType.APPLICATION_JSON)
@@ -154,15 +158,15 @@ public class AccountControllerTests extends TravelpayApplicationTests{
    public void addAccountAmountTest() throws Exception{
    	
         account.setPassengerId(passenngerId);
-        account.setAccountQuantity(200);
+        account.setAccountQuantity(amountInitial);
         this.mockMvc.perform(post("/accounts/addAccountBalance")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(account)))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(content().contentType("application/json;charset=UTF-8"))
-                    .andExpect(jsonPath("$.passengerId").value("941234567v"))
-                    .andExpect(jsonPath("$.accountQuantity").value(400));
+                    .andExpect(jsonPath("$.passengerId").value(passenngerId))
+                    .andExpect(jsonPath("$.accountQuantity").value(amountAfterRecharge));
    }
 
 
