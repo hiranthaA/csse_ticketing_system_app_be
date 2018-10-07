@@ -7,40 +7,33 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Bus {
 	@Id
 	private String busId;
-	private int routeNo;
-	private String fromLocation;
-	private String toLocation;
-	private String currentLocation;
-	
-	
+	private String routeNo;
+	private int currentLocation;
+	private String password;
 	public String getBusId() {
 		return busId;
 	}
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
-	public String getToLocation() {
-		return toLocation;
-	}
-	public void setToLocation(String toLocation) {
-		this.toLocation = toLocation;
-	}
-	public String getCurrentLocation() {
-		return currentLocation;
-	}
-	public void setCurrentLocation(String currentLocation) {
-		this.currentLocation = currentLocation;
-	}
-	public String getFromLocation() {
-		return fromLocation;
-	}
-	public void setFromLocation(String fromLocation) {
-		this.fromLocation = fromLocation;
-	}
-	public int getRouteNo() {
+	public String getRouteNo() {
 		return routeNo;
 	}
-	public void setRouteNo(int routeNo) {
+	public void setRouteNo(String routeNo) {
 		this.routeNo = routeNo;
 	}
+	public int getCurrentLocation() {
+		return currentLocation;
+	}
+	public void setCurrentLocation(int currentLocation) {
+		this.currentLocation = currentLocation;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 }
