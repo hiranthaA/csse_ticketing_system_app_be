@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.MongoOperations;
 
 public class MongoConnection {
 	
+	//Singleton design pattern
+	
 	private static MongoConnection instance;
 	private MongoOperations mo;
 	

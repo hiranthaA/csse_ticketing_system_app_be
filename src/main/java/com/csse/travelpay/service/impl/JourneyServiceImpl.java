@@ -35,19 +35,16 @@ public class JourneyServiceImpl implements JourneyService{
 		else {
 			if(cid!=null && status!=null) {
 				//journey list of specific customer with given status
-				System.out.println(cid+ " " +status);
 				Query query = new Query();
 				query.addCriteria(Criteria.where("passengerId").is(cid).and("jstatus").is(status));
 				return MongoConnection.getInstance().getMongoOperation().find(query, Journey.class);
 			}
 			else if(cid!=null){
 				//journey list of specific customer
-				System.out.println(cid+ " " +status);
 				return journeyrepo.findAllByPassengerId(cid);
 			}
 			else if(status!=null){
 				//journey list of given status 
-				System.out.println(cid+ " " +status);
 				return journeyrepo.findAllByJstatus(status);
 			}
 			else {
