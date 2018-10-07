@@ -1,6 +1,7 @@
 package com.csse.travelpay.controller;
 
 import com.csse.travelpay.dto.FareListUpdateRequest;
+import com.csse.travelpay.model.BusHalt;
 import com.csse.travelpay.model.BusRoute;
 import com.csse.travelpay.model.FareList;
 import com.csse.travelpay.model.Journey;
@@ -49,4 +50,15 @@ public class RouteController {
 	public FareList updateFareList(@RequestBody FareListUpdateRequest request){
 		return routeService.updateFareList(request);
 	}
+
+	@RequestMapping(value="/get",method=RequestMethod.GET)
+	public BusRoute getRouteByRouteNumber(@RequestParam String routeId){
+		return routeService.getRouteByRouteNumber(routeId);
+	}
+
+	@RequestMapping(value="/getHalt",method=RequestMethod.GET)
+	public BusHalt getRoutes(@RequestParam String routeId, @RequestParam int haltIndex){
+		return routeService.getHaltByRouteNumberAndHaltIndex(routeId, haltIndex);
+	}
+
 }

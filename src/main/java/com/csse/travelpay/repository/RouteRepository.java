@@ -14,4 +14,5 @@ public interface RouteRepository extends MongoRepository<BusRoute, String> {
 
     List<BusRoute> findAllByActiveTrue();
 
+    BusRoute findOneByBusRouteNumber(String routeNum);
 }
