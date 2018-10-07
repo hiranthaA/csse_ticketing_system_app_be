@@ -2,6 +2,7 @@ package com.csse.travelpay.service.impl;
 
 import com.csse.travelpay.config.MongoConfig;
 import com.csse.travelpay.dto.FareListUpdateRequest;
+import com.csse.travelpay.model.BusHalt;
 import com.csse.travelpay.model.BusRoute;
 import com.csse.travelpay.model.FareList;
 import com.csse.travelpay.repository.FareRepository;
@@ -84,6 +85,23 @@ public class RouteServiceImpl implements RouteService {
         }
         return null;
 
+    }
+
+    @Override
+    public BusRoute getRouteByRouteNumber(String routeNum) {
+        return routeRepo.findOneByBusRouteNumber(routeNum);
+    }
+
+    @Override
+    public BusHalt getHaltByRouteNumberAndHaltIndex(String routeId, int haltIndex) {
+        BusRoute route = routeRepo.findOneByBusRouteNumber(routeId);
+
+        for (BusHalt halt: route.getHaltList()) {
+            if(haltIndex==halt.getIndex()){
+                return halt;
+            }
+        }
+        return null;
     }
 
 }
