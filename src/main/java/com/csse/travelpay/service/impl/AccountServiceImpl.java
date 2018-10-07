@@ -40,7 +40,18 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
 
     @Override
     public Account addAccount(Account j) {
-        return accountRepo.save(j);
+
+    	Account exists = accountRepo.findAccountByPassengerId(j.getPassengerId());
+        if(exists!=null) {
+        	if(exists.getAccountQuantity()==0)
+        		exists.setAccountQuantity(j.getAccountQuantity());
+        	if(j.getCardNo()!=""||j.getCardNo()!=null)
+        		exists.setCardNo(j.getCardNo());
+        	exists.setPhoneNo(j.getPhoneNo());
+        	j=exists;
+        }
+    	return accountRepo.save(j);
+
     }
 
     @Override
@@ -50,10 +61,10 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
 
     @Override
     public Account getAccountByPassengerIdOrAccountId(String passID, String accId) {
-        if(accId!=""&&passID!=""){
-            return accountRepo.findAccountByPassengerIdAndAccountId(passID, accId);
-        }
-        if(accId!="")
+//        if(accId!=passID){
+//            return accountRepo.findAccountByPassengerIdAndAccountId(passID, accId);
+//        }
+        if(accId!=""&&accId!=passID)
             return accountRepo.findAccountByAccountId(accId);
         else
             return accountRepo.findAccountByPassengerId(passID);
@@ -72,7 +83,7 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
     @Override
     public Account sendSMSValidation(Account no) {
         Account reciepient=null;
-        reciepient = accountRepo.findAccountByPhoneNo(no.getPhoneNo());
+        reciepient = accountRepo.findAccountByPassengerId(no.getPassengerId());
 
         if(reciepient!=null){
             Random rand = new Random();
@@ -83,7 +94,7 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
             int phoneNum=767590028;
             
             try {
-                String  phone = reciepient.getPhoneNo().replaceAll("\\s","");
+                String  phone = no.getPhoneNo().replaceAll("\\s","");
                 if(phone.startsWith("+")){
                     phoneNum =Integer.parseInt(phone.substring(3));
                 }else if(phone.startsWith("0"))
@@ -105,6 +116,9 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
                 account = accountRepo.findAccountByCardNo(acc.getCardNo());
             if(account!=null){
                 account.setAccountQuantity(account.getAccountQuantity()+acc.getAccountQuantity());
+            }else {
+            	account = accountRepo.findAccountByPassengerId(acc.getPassengerId());
+            	account.setAccountQuantity(account.getAccountQuantity()+acc.getAccountQuantity());
             }
             if(account!=null)
 
@@ -118,7 +132,7 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
     public boolean sendSMS(int code,int phoneno){
         boolean messageStatus = false;
         Message message = Message.creator(new PhoneNumber("+94"+phoneno), new PhoneNumber("+1 860 615 3924"),
-                            ". \n\n\nYour Code is: "+code+"\n\nPlease enter this code in your travelpay app.").create();
+                            ". \n\n\nYour Code is: "+code+"\n\nPlease enter this code in your Travel Pay app.").create();
 
 
         String status = message.getStatus().toString();
@@ -133,7 +147,7 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
         int codeToCheck = Integer.parseInt(code);
         Account account= null;
         if(codeToCheck==validation){
-            account = accountRepo.findAccountByPhoneNo(acc.getPhoneNo());
+            account = accountRepo.findAccountByPassengerId(acc.getPassengerId());
             account.setAccountQuantity(acc.getAccountQuantity()+account.getAccountQuantity());
             accountRepo.save(account);
         }

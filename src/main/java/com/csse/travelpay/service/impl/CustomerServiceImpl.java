@@ -3,6 +3,8 @@ package com.csse.travelpay.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.csse.travelpay.factory.User;
+import com.csse.travelpay.factory.UserFactory;
 import com.csse.travelpay.model.Customer;
 import com.csse.travelpay.repository.CustomerRepository;
 import com.csse.travelpay.service.CustomerService;
@@ -15,7 +17,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer addCustomer(Customer c) {
-		return custrepo.save(c);
+		System.out.println("this is addCustomer in Customer Service");
+		UserFactory userfactory = new UserFactory();
+		User usr = userfactory.getUser(c.getCustomerType());
+		return custrepo.save(usr.createUser(c));
+		//return usr.createUser(c);
 	}
 
 	@Override

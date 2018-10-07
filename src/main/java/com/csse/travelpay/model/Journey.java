@@ -11,14 +11,13 @@ public class Journey {
 	private String journeyId;
 	private String passengerId;
 	private String busId;
-	private String busroot;
-	private String jstartloc;
-	private String jendloc;
+	private String busroute;
+	private int jstartloc;
+	private int jendloc;
 	private Date jstarttime;
 	private Date jendtime;
 	private String jstatus;
 	private double jfare;
-	
 	public String getJourneyId() {
 		return journeyId;
 	}
@@ -37,22 +36,22 @@ public class Journey {
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
-	public String getBusroot() {
-		return busroot;
+	public String getBusroute() {
+		return busroute;
 	}
-	public void setBusroot(String busroot) {
-		this.busroot = busroot;
+	public void setBusroute(String busroute) {
+		this.busroute = busroute;
 	}
-	public String getJstartloc() {
+	public int getJstartloc() {
 		return jstartloc;
 	}
-	public void setJstartloc(String jstartloc) {
+	public void setJstartloc(int jstartloc) {
 		this.jstartloc = jstartloc;
 	}
-	public String getJendloc() {
+	public int getJendloc() {
 		return jendloc;
 	}
-	public void setJendloc(String jendloc) {
+	public void setJendloc(int jendloc) {
 		this.jendloc = jendloc;
 	}
 	public Date getJstarttime() {
@@ -79,5 +78,4 @@ public class Journey {
 	public void setJfare(double jfare) {
 		this.jfare = jfare;
 	}
-	
 }
