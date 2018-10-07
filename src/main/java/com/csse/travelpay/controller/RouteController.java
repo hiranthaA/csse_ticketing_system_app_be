@@ -46,19 +46,28 @@ public class RouteController {
 		return routeService.getFareList(list);
 	}
 
-	@RequestMapping(value="/updateFareList",method=RequestMethod.POST)
+    //update fare list, given min fare and increment percentage
+    @RequestMapping(value="/updateFareList",method=RequestMethod.POST)
 	public FareList updateFareList(@RequestBody FareListUpdateRequest request){
 		return routeService.updateFareList(request);
 	}
 
-	@RequestMapping(value="/get",method=RequestMethod.GET)
+    // returns a bus route by route number
+    @RequestMapping(value="/get",method=RequestMethod.GET)
 	public BusRoute getRouteByRouteNumber(@RequestParam String routeId){
 		return routeService.getRouteByRouteNumber(routeId);
 	}
 
-	@RequestMapping(value="/getHalt",method=RequestMethod.GET)
+    // return an bus halt, given route number and halt index
+    @RequestMapping(value="/getHalt",method=RequestMethod.GET)
 	public BusHalt getRoutes(@RequestParam String routeId, @RequestParam int haltIndex){
 		return routeService.getHaltByRouteNumberAndHaltIndex(routeId, haltIndex);
 	}
+
+    // calculate fare between two given halts
+    @RequestMapping(value="/getFare",method=RequestMethod.GET)
+    public double getFare(@RequestParam int halt1, @RequestParam int halt2){
+        return routeService.getFare(halt1, halt2);
+    }
 
 }
