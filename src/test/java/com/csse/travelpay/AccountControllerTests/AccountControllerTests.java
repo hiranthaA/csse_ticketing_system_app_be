@@ -43,8 +43,9 @@ import org.springframework.web.context.WebApplicationContext;
 public class AccountControllerTests extends TravelpayApplicationTests{
    
     @Autowired
-   WebApplicationContext webApplicationContext;
+    WebApplicationContext webApplicationContext;
 
+    
 
     private MockMvc mockMvc;
 
@@ -69,6 +70,7 @@ public class AccountControllerTests extends TravelpayApplicationTests{
     
     /**
      * Created By: Parakrama
+     * AccountController,  addAccount
      * Service test for add account
      * @throws Exception
      */
@@ -89,6 +91,7 @@ public class AccountControllerTests extends TravelpayApplicationTests{
    
    /**
     * Created By: Parakrama
+    * AccountController, getAccountById
     * Service Test for get all accounts
     * @throws Exception
     */
@@ -109,27 +112,30 @@ public class AccountControllerTests extends TravelpayApplicationTests{
 
    /**
      * Created By: Parakrama
+     * AccountController, sendMessage
      * Service test for Send Validation SMS
      * @throws Exception
      */
-//    @Test
-//    public void sendMessageTest() throws Exception{
-//        
-//        account.setPassengerId(passenngerId);
-//        account.setAccountQuantity(amountInitial);
-//        account.setPhoneNo(mobile);
-//        this.mockMvc.perform(post("/accounts/sendSMS")
-//                     .contentType(MediaType.APPLICATION_JSON)
-//                     .content(objectMapper.writeValueAsString(account)))
-//                     .andDo(print())
-//                     .andExpect(status().isOk())
-//                     .andExpect(content().contentType("application/json;charset=UTF-8"))
-//                     .andExpect(jsonPath("$.passengerId").value(passenngerId))
-//                     .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
-//    }
+    @Test
+    public void sendMessageTest() throws Exception{
+        
+        account.setPassengerId(passenngerId);
+        account.setAccountQuantity(amountInitial);
+        account.setPhoneNo(mobile);
+        this.mockMvc.perform(post("/accounts/sendSMS")
+                     .contentType(MediaType.APPLICATION_JSON)
+                     .content(objectMapper.writeValueAsString(account)))
+                     .andDo(print())
+                     .andExpect(status().isOk())
+                     .andExpect(content().contentType("application/json;charset=UTF-8"))
+                     .andExpect(jsonPath("$.passengerId").value(passenngerId))
+                     .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
+    }
  
      /**
      * Created By: Parakrama
+     * AccountController, verifyCode
+     * For invalid verification
      * Service test for Send Validation SMS
      * @throws Exception
      */
@@ -151,6 +157,7 @@ public class AccountControllerTests extends TravelpayApplicationTests{
     
     /**
      * Created By: Parakrama
+     * AccountController, addAccountBalance
      * Service test for adding account amount
      * @throws Exception
      */

@@ -28,7 +28,7 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Account addJourney(@RequestBody Account j) {
+    public Account addAccount(@RequestBody Account j) {
         return accountService.addAccount(j);
     }
 
