@@ -28,7 +28,7 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Account addJourney(@RequestBody Account j) {
+    public Account addAccount(@RequestBody Account j) {
         return accountService.addAccount(j);
     }
 
@@ -57,7 +57,7 @@ public class AccountController {
 		return accountService.sendSMSValidation(acc);
     }
     @RequestMapping(value="/recharge/{code}",method=RequestMethod.POST)
-	public Account sendMessage(@RequestBody Account acc,@PathVariable("code") String code){
+	public Account verifyCode(@RequestBody Account acc,@PathVariable("code") String code){
 		return accountService.validate(code,acc);
     }
 
