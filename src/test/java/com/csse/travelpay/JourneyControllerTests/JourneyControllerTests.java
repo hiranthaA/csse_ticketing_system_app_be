@@ -31,7 +31,7 @@ public class JourneyControllerTests extends TravelpayApplicationTests{
 	    private MockMvc mockMvc;
 	    
 	    Journey journey = new Journey();
-	    
+	    private static String journeyId = "100";
 		private static String passengerId = "10";
 		private static String busId = "AB-1111";
 		private static String busroute = "90-A";
@@ -52,7 +52,7 @@ public class JourneyControllerTests extends TravelpayApplicationTests{
 	    
 	    @Test
 	    public void addAccountTest() throws Exception{
-
+	    	journey.setJourneyId(journeyId);
 			journey.setPassengerId(passengerId);
 			journey.setBusId(busId);
 			journey.setBusroute(busroute);
@@ -64,6 +64,7 @@ public class JourneyControllerTests extends TravelpayApplicationTests{
 	                            .content(objectMapper.writeValueAsString(journey)))
 	                            .andDo(print())
 	                            .andExpect(status().isOk())
+	                            .andExpect(jsonPath("$.journeyId").value(journey.getJourneyId()))
 			                    .andExpect(jsonPath("$.passengerId").value(journey.getPassengerId()))
 			                    .andExpect(jsonPath("$.busId").value(journey.getBusId()))
 			                    .andExpect(jsonPath("$.busroute").value(journey.getBusroute()))
@@ -76,16 +77,18 @@ public class JourneyControllerTests extends TravelpayApplicationTests{
 	    @Test
 	    public void getAccountByIdTest() throws Exception{
 	    	
+	    	journey.setJourneyId(journeyId);
 	    	journey.setPassengerId(passengerId);
 			journey.setBusId(busId);
 			journey.setBusroute(busroute);
 			journey.setJstatus(jstatus);
 			journey.setJfare(jfare);
 			
-	        this.mockMvc.perform(get("/journey/getbyid?jid="+"5bbab63bac0d2436a890ec91"))
+	        this.mockMvc.perform(get("/journey/getbyid?jid="+journeyId))
 	        			.andDo(print())
 	                    .andExpect(status().isOk())
 	                    .andExpect(content().contentType("application/json;charset=UTF-8"))
+	                    .andExpect(jsonPath("$.journeyId").value(journey.getJourneyId()))
 	                    .andExpect(jsonPath("$.passengerId").value(journey.getPassengerId()))
 	                    .andExpect(jsonPath("$.busId").value(journey.getBusId()))
 	                    .andExpect(jsonPath("$.busroute").value(journey.getBusroute()))
