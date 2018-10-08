@@ -4,6 +4,6 @@ import com.csse.travelpay.model.Bus;
 
 public interface BusService {
 	Bus getCurrentLocation(String busId);
-
 	Bus addBus(Bus bus);
+	Bus login(String busID,String password);
 }

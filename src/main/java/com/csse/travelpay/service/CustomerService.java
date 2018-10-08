@@ -8,4 +8,6 @@ public interface CustomerService {
 
 	Customer getUser(String email);
 
+	Customer getUserdetails(String id);
+
 }

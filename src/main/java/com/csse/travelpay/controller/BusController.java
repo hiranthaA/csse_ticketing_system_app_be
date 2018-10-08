@@ -24,6 +24,11 @@ public class BusController {
 		return busService.getCurrentLocation(busId);
 	}
 	
+	@RequestMapping(value="/login",method=RequestMethod.GET)
+	public Bus login(@RequestParam String busId,@RequestParam String password){
+		return busService.login(busId, password);
+	}
+	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public Bus addBus(@RequestBody Bus bus){
 		return busService.addBus(bus);

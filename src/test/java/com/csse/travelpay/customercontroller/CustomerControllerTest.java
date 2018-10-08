@@ -22,58 +22,58 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class CustomerControllerTest extends TravelpayApplicationTests{
    
-    @Autowired
-   WebApplicationContext webApplicationContext;
-
-
-    private MockMvc mockMvc;
-
-    Customer cust = new Customer();
-
-    private static String nicorpassport = ("1234");
-    private static String customerType = "foreign";
-    
-    JSONObject json;
-    
-    @Autowired
-    ObjectMapper objectMapper;
-    
-
-    @Before
-    public void setup(){
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                            .build();
-    }
-
-   @Test
-    public void addCustomerTest() throws Exception{
-
-		cust.setNicorpassport(nicorpassport);
-        cust.setCustomerType(customerType);  
-        
-		this.mockMvc.perform(post("/customer/add")
-		                    .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(cust)))
-                            .andDo(print())
-                            .andExpect(status().isOk())
-		                    .andExpect(jsonPath("$.nicorpassport").value(cust.getNicorpassport()))
-		                    .andExpect(jsonPath("$.customerType").value(cust.getCustomerType()));
-		                    
-		        
-    }
-   
-
-   @Test
-   public void getCustomerByIdNicorPassport() throws Exception{
-        cust.setCustomerType(customerType);
-        cust.setNicorpassport(nicorpassport);
-        this.mockMvc.perform(get("/customer/getuser/"+nicorpassport))
-        			.andDo(print())
-                   .andExpect(status().isOk())
-                   .andExpect(content().contentType("application/json;charset=UTF-8"))
-                   .andExpect(jsonPath("$.nicorpassport").value(cust.getNicorpassport()))
-                   .andExpect(jsonPath("$.customerType").value(cust.getCustomerType()));
-   }
+//    @Autowired
+//   WebApplicationContext webApplicationContext;
+//
+//
+//    private MockMvc mockMvc;
+//
+//    Customer cust = new Customer();
+//
+//    private static String nicorpassport = ("1234");
+//    private static String customerType = "foreign";
+//    
+//    JSONObject json;
+//    
+//    @Autowired
+//    ObjectMapper objectMapper;
+//    
+//
+//    @Before
+//    public void setup(){
+//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+//                            .build();
+//    }
+//
+//   @Test
+//    public void addCustomerTest() throws Exception{
+//
+//		cust.setNicorpassport(nicorpassport);
+//        cust.setCustomerType(customerType);  
+//        
+//		this.mockMvc.perform(post("/customer/add")
+//		                    .contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectMapper.writeValueAsString(cust)))
+//                            .andDo(print())
+//                            .andExpect(status().isOk())
+//		                    .andExpect(jsonPath("$.nicorpassport").value(cust.getNicorpassport()))
+//		                    .andExpect(jsonPath("$.customerType").value(cust.getCustomerType()));
+//		                    
+//		        
+//    }
+//   
+//
+//   @Test
+//   public void getCustomerByIdNicorPassport() throws Exception{
+//        cust.setCustomerType(customerType);
+//        cust.setNicorpassport(nicorpassport);
+//        this.mockMvc.perform(get("/customer/getuser/"+nicorpassport))
+//        			.andDo(print())
+//                   .andExpect(status().isOk())
+//                   .andExpect(content().contentType("application/json;charset=UTF-8"))
+//                   .andExpect(jsonPath("$.nicorpassport").value(cust.getNicorpassport()))
+//                   .andExpect(jsonPath("$.customerType").value(cust.getCustomerType()));
+//   }
 
 
 }

@@ -7,5 +7,5 @@ import com.csse.travelpay.model.Bus;
 
 @Repository
 public interface BusRepository extends MongoRepository<Bus,String> {
-
+	Bus findOneBybusId(String busID);
 }

@@ -30,5 +30,16 @@ public class BusServiceImpl implements BusService {
 		System.out.println(bus.getBusId());
 		return busrepo.save(bus);
 	}
+	
+	@Override
+	public Bus login(String busID, String password) {
+		Bus bus=busrepo.findOneBybusId(busID);
+		if(bus.getPassword().equals(password)) {
+			return bus;
+		}
+		else {
+			return new Bus();
+		}
+	}
 
 }

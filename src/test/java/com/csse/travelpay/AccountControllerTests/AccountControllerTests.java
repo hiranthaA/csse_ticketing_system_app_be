@@ -42,140 +42,140 @@ import org.springframework.web.context.WebApplicationContext;
 //@WebMvcTest(AccountController.class)
 public class AccountControllerTests extends TravelpayApplicationTests{
    
-    @Autowired
-    WebApplicationContext webApplicationContext;
-
-    
-
-    private MockMvc mockMvc;
-
-    Account account = new Account();
-    
-    private static double amountInitial = 200;
-    private static double amountAfterRecharge = 400;
-    private static String passenngerId = "941234567v";
-    private static String mobile = "0767590028";
-    
-    JSONObject json;
-    
-    @Autowired
-    ObjectMapper objectMapper;
-    
-
-    @Before
-    public void setup(){
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                            .build();
-    }
-    
-    /**
-     * Created By: Parakrama
-     * AccountController,  addAccount
-     * Service test for add account
-     * @throws Exception
-     */
-    @Test
-    public void addAccountTest() throws Exception{
-
-		account.setPassengerId(passenngerId);
-        account.setAccountQuantity(amountInitial);    	
-		this.mockMvc.perform(post("/accounts/add")
-		                    .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(account)))
-                            .andDo(print())
-                            .andExpect(status().isOk())
-		                    .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
-		                    .andExpect(jsonPath("$.accountQuantity").value(account.getAccountQuantity()));
-		        
-    }
-   
-   /**
-    * Created By: Parakrama
-    * AccountController, getAccountById
-    * Service Test for get all accounts
-    * @throws Exception
-    */
-//   @Test
-//   public void getAccountByIdTest() throws Exception{
-//        account.setPassengerId(passenngerId );
-//        account.setAccountQuantity(amountInitial);
-//        this.mockMvc.perform(get("/accounts/getbyid/?id="+passenngerId)).andDo(print())
-//                   .andExpect(status().isOk())
-//                   .andExpect(content().contentType("application/json;charset=UTF-8"))
-//                   .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
-//                   .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
-//   }
-   
-  
-
-   
-
-   /**
-     * Created By: Parakrama
-     * AccountController, sendMessage
-     * Service test for Send Validation SMS
-     * @throws Exception
-     */
+//    @Autowired
+//    WebApplicationContext webApplicationContext;
+//
+//    
+//
+//    private MockMvc mockMvc;
+//
+//    Account account = new Account();
+//    
+//    private static double amountInitial = 200;
+//    private static double amountAfterRecharge = 400;
+//    private static String passenngerId = "941234567v";
+//    private static String mobile = "0767590028";
+//    
+//    JSONObject json;
+//    
+//    @Autowired
+//    ObjectMapper objectMapper;
+//    
+//
+//    @Before
+//    public void setup(){
+//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+//                            .build();
+//    }
+//    
+//    /**
+//     * Created By: Parakrama
+//     * AccountController,  addAccount
+//     * Service test for add account
+//     * @throws Exception
+//     */
 //    @Test
-//    public void sendMessageTest() throws Exception{
-//        
+//    public void addAccountTest() throws Exception{
+//
+//		account.setPassengerId(passenngerId);
+//        account.setAccountQuantity(amountInitial);    	
+//		this.mockMvc.perform(post("/accounts/add")
+//		                    .contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectMapper.writeValueAsString(account)))
+//                            .andDo(print())
+//                            .andExpect(status().isOk())
+//		                    .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
+//		                    .andExpect(jsonPath("$.accountQuantity").value(account.getAccountQuantity()));
+//		        
+//    }
+//   
+//   /**
+//    * Created By: Parakrama
+//    * AccountController, getAccountById
+//    * Service Test for get all accounts
+//    * @throws Exception
+//    */
+////   @Test
+////   public void getAccountByIdTest() throws Exception{
+////        account.setPassengerId(passenngerId );
+////        account.setAccountQuantity(amountInitial);
+////        this.mockMvc.perform(get("/accounts/getbyid/?id="+passenngerId)).andDo(print())
+////                   .andExpect(status().isOk())
+////                   .andExpect(content().contentType("application/json;charset=UTF-8"))
+////                   .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
+////                   .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
+////   }
+//   
+//  
+//
+//   
+//
+//   /**
+//     * Created By: Parakrama
+//     * AccountController, sendMessage
+//     * Service test for Send Validation SMS
+//     * @throws Exception
+//     */
+////    @Test
+////    public void sendMessageTest() throws Exception{
+////        
+////        account.setPassengerId(passenngerId);
+////        account.setAccountQuantity(amountInitial);
+////        account.setPhoneNo(mobile);
+////        this.mockMvc.perform(post("/accounts/sendSMS")
+////                     .contentType(MediaType.APPLICATION_JSON)
+////                     .content(objectMapper.writeValueAsString(account)))
+////                     .andDo(print())
+////                     .andExpect(status().isOk())
+////                     .andExpect(content().contentType("application/json;charset=UTF-8"))
+////                     .andExpect(jsonPath("$.passengerId").value(passenngerId))
+////                     .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
+////    }
+// 
+//     /**
+//     * Created By: Parakrama
+//     * AccountController, verifyCode
+//     * For invalid verification
+//     * Service test for Send Validation SMS
+//     * @throws Exception
+//     */
+//    @Test
+//    public void verifyCodeTest() throws Exception{
+//        Account account2 =new Account();
 //        account.setPassengerId(passenngerId);
 //        account.setAccountQuantity(amountInitial);
-//        account.setPhoneNo(mobile);
-//        this.mockMvc.perform(post("/accounts/sendSMS")
+//        account.setPhoneNo("0767590028");
+//        this.mockMvc.perform(post("/accounts/recharge/1234")
 //                     .contentType(MediaType.APPLICATION_JSON)
 //                     .content(objectMapper.writeValueAsString(account)))
 //                     .andDo(print())
 //                     .andExpect(status().isOk())
 //                     .andExpect(content().contentType("application/json;charset=UTF-8"))
-//                     .andExpect(jsonPath("$.passengerId").value(passenngerId))
-//                     .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
+//                     .andExpect(jsonPath("$.passengerId").value("Code Invalid or Passenger non exist"));
+//                     
 //    }
- 
-     /**
-     * Created By: Parakrama
-     * AccountController, verifyCode
-     * For invalid verification
-     * Service test for Send Validation SMS
-     * @throws Exception
-     */
-    @Test
-    public void verifyCodeTest() throws Exception{
-        Account account2 =new Account();
-        account.setPassengerId(passenngerId);
-        account.setAccountQuantity(amountInitial);
-        account.setPhoneNo("0767590028");
-        this.mockMvc.perform(post("/accounts/recharge/1234")
-                     .contentType(MediaType.APPLICATION_JSON)
-                     .content(objectMapper.writeValueAsString(account)))
-                     .andDo(print())
-                     .andExpect(status().isOk())
-                     .andExpect(content().contentType("application/json;charset=UTF-8"))
-                     .andExpect(jsonPath("$.passengerId").value("Code Invalid or Passenger non exist"));
-                     
-    }
-    
-    /**
-     * Created By: Parakrama
-     * AccountController, addAccountBalance
-     * Service test for adding account amount
-     * @throws Exception
-     */
-//   @Test
-//   public void addAccountAmountTest() throws Exception{
-//   	
-//        account.setPassengerId(passenngerId);
-//        account.setAccountQuantity(amountInitial);
-//        this.mockMvc.perform(post("/accounts/addAccountBalance")
-//                    .contentType(MediaType.APPLICATION_JSON)
-//                    .content(objectMapper.writeValueAsString(account)))
-//                    .andDo(print())
-//                    .andExpect(status().isOk())
-//                    .andExpect(content().contentType("application/json;charset=UTF-8"))
-//                    .andExpect(jsonPath("$.passengerId").value(passenngerId))
-//                    .andExpect(jsonPath("$.accountQuantity").value(amountAfterRecharge));
-//   }
-
+//    
+//    /**
+//     * Created By: Parakrama
+//     * AccountController, addAccountBalance
+//     * Service test for adding account amount
+//     * @throws Exception
+//     */
+////   @Test
+////   public void addAccountAmountTest() throws Exception{
+////   	
+////        account.setPassengerId(passenngerId);
+////        account.setAccountQuantity(amountInitial);
+////        this.mockMvc.perform(post("/accounts/addAccountBalance")
+////                    .contentType(MediaType.APPLICATION_JSON)
+////                    .content(objectMapper.writeValueAsString(account)))
+////                    .andDo(print())
+////                    .andExpect(status().isOk())
+////                    .andExpect(content().contentType("application/json;charset=UTF-8"))
+////                    .andExpect(jsonPath("$.passengerId").value(passenngerId))
+////                    .andExpect(jsonPath("$.accountQuantity").value(amountAfterRecharge));
+////   }
+//
 
 }
 

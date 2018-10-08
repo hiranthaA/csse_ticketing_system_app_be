@@ -30,5 +30,10 @@ public class CustomerController {
 	public Customer getUserById(@PathVariable String email) {
 		return customerservice.getUser(email);
 	}
+	
+	@RequestMapping(value="/getuserdetails/{id}",method=RequestMethod.GET)
+	public Customer getUserdetailsById(@PathVariable String id) {
+		return customerservice.getUserdetails(id);
+	}
 
 }

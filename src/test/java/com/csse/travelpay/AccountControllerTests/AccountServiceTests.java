@@ -47,38 +47,38 @@ import org.springframework.web.context.WebApplicationContext;
 @WebMvcTest(value = AccountController.class,secure = false)
 public class AccountServiceTests{
    
-    @Autowired
-    private MockMvc mockMvc;
-    
-    @MockBean
-    private AccountService accountService;
-    
-    Account account = new Account();
-    String actualPassengerId = "941234567v";
-    String expectedPassengerId = "941234567v";
-    double actualBalance = 200;
-    
-    
-    @Test
-    public void getAccountByPassengerId() throws Exception{
-    account.setPassengerId(actualPassengerId);
-    account.setAccountQuantity(actualBalance);
-    	Mockito.when(
-    				accountService.getAccountByPassengerIdOrAccountId(Mockito.anyString(),Mockito.anyString())
-    				).thenReturn(account);
-    				
-    	RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-    			"/accounts/getbyid/?id="+actualPassengerId
-    			).accept(MediaType.APPLICATION_JSON);
-    	
-    	MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-    	System.out.println(result.getResponse());
-    	String expected = "{passengerId:941234567v,accountQuantity:200}";
-    	
-    	JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
-    			
-    	
-    }
-    
+//    @Autowired
+//    private MockMvc mockMvc;
+//    
+//    @MockBean
+//    private AccountService accountService;
+//    
+//    Account account = new Account();
+//    String actualPassengerId = "941234567v";
+//    String expectedPassengerId = "941234567v";
+//    double actualBalance = 200;
+//    
+//    
+//    @Test
+//    public void getAccountByPassengerId() throws Exception{
+//    account.setPassengerId(actualPassengerId);
+//    account.setAccountQuantity(actualBalance);
+//    	Mockito.when(
+//    				accountService.getAccountByPassengerIdOrAccountId(Mockito.anyString(),Mockito.anyString())
+//    				).thenReturn(account);
+//    				
+//    	RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
+//    			"/accounts/getbyid/?id="+actualPassengerId
+//    			).accept(MediaType.APPLICATION_JSON);
+//    	
+//    	MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+//    	System.out.println(result.getResponse());
+//    	String expected = "{passengerId:941234567v,accountQuantity:200}";
+//    	
+//    	JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
+//    			
+//    	
+//    }
+//    
     
 }

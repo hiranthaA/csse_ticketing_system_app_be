@@ -30,6 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
 		return custrepo.findOneByNicorpassport(email);
 	}
 
+	@Override
+	public Customer getUserdetails(String id) {
+		// TODO Auto-generated method stub
+		return custrepo.findOneById(id);
+	}
+
 	
 
 }

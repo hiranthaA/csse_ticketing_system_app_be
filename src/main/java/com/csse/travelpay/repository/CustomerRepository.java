@@ -7,4 +7,6 @@ import com.csse.travelpay.model.Customer;
 public interface CustomerRepository extends MongoRepository<Customer, String> {
 	Customer findOneByNicorpassport(String id);
 
+	Customer findOneById(String id);
+
 }
