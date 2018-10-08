@@ -19,14 +19,16 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerservice;
 	
+	//add customer method mapping
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public Customer addCustomer(@RequestBody Customer c) {
 		return customerservice.addCustomer(c);
 	}
 	
-	@RequestMapping(value="/getuser/{id}",method=RequestMethod.GET)
-	public Customer getUserById(@PathVariable String id) {
-		return customerservice.getUser(id);
+	//get user mapping
+	@RequestMapping(value="/getuser/{email}",method=RequestMethod.GET)
+	public Customer getUserById(@PathVariable String email) {
+		return customerservice.getUser(email);
 	}
 
 }
