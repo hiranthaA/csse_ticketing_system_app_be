@@ -161,20 +161,20 @@ public class AccountControllerTests extends TravelpayApplicationTests{
      * Service test for adding account amount
      * @throws Exception
      */
-   @Test
-   public void addAccountAmountTest() throws Exception{
-   	
-        account.setPassengerId(passenngerId);
-        account.setAccountQuantity(amountInitial);
-        this.mockMvc.perform(post("/accounts/addAccountBalance")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(account)))
-                    .andDo(print())
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType("application/json;charset=UTF-8"))
-                    .andExpect(jsonPath("$.passengerId").value(passenngerId))
-                    .andExpect(jsonPath("$.accountQuantity").value(amountAfterRecharge));
-   }
+//   @Test
+//   public void addAccountAmountTest() throws Exception{
+//   	
+//        account.setPassengerId(passenngerId);
+//        account.setAccountQuantity(amountInitial);
+//        this.mockMvc.perform(post("/accounts/addAccountBalance")
+//                    .contentType(MediaType.APPLICATION_JSON)
+//                    .content(objectMapper.writeValueAsString(account)))
+//                    .andDo(print())
+//                    .andExpect(status().isOk())
+//                    .andExpect(content().contentType("application/json;charset=UTF-8"))
+//                    .andExpect(jsonPath("$.passengerId").value(passenngerId))
+//                    .andExpect(jsonPath("$.accountQuantity").value(amountAfterRecharge));
+//   }
 
 
 }
