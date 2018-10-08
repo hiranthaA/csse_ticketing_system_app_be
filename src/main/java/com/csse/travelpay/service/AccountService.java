@@ -12,7 +12,6 @@ public interface AccountService {
     Account getAccountByPhoneOrCard(String phoneOrCard);
     Account addAccountAmount(Account acc);
     Account sendSMSValidation(Account no);
-
     Account validate(String code,Account acc);
 	
 }
