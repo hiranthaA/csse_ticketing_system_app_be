@@ -43,11 +43,14 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
 
     	Account exists = accountRepo.findAccountByPassengerId(j.getPassengerId());
         if(exists!=null) {
+        	
         	if(exists.getAccountQuantity()==0)
         		exists.setAccountQuantity(j.getAccountQuantity());
         	if(j.getCardNo()!=""||j.getCardNo()!=null)
         		exists.setCardNo(j.getCardNo());
-        	exists.setPhoneNo(j.getPhoneNo());
+        	if(j.getPhoneNo()!=null) {
+        		exists.setPhoneNo(j.getPhoneNo());
+        	}
         	j=exists;
         }
     	return accountRepo.save(j);
@@ -77,6 +80,10 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
         if(result==null){
             result = accountRepo.findAccountByCardNo(phoneOrCard);
         }
+        if(result==null) {
+        	result = new Account();
+        	result.setPassengerId("No Such Passenger");
+        }
         return result;
     }
     
@@ -103,6 +110,9 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
                 System.err.print(e.getMessage());
             }
             sendSMS(random,phoneNum);
+        }else {
+        	reciepient = new Account();
+        	reciepient.setPassengerId("No Such Passenger");
         }
         return reciepient;
     }
@@ -111,8 +121,9 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
     public Account addAccountAmount(Account acc) {
         Account account = null;
         if(acc!=null){
-            account = accountRepo.findAccountByPhoneNo(acc.getPhoneNo());
-            if(account==null)
+        	if(acc.getPhoneNo()!=null)
+        		account = accountRepo.findAccountByPhoneNo(acc.getPhoneNo());
+            if(account==null&&acc.getCardNo()!=null)
                 account = accountRepo.findAccountByCardNo(acc.getCardNo());
             if(account!=null){
                 account.setAccountQuantity(account.getAccountQuantity()+acc.getAccountQuantity());
@@ -120,9 +131,17 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
             	account = accountRepo.findAccountByPassengerId(acc.getPassengerId());
             	account.setAccountQuantity(account.getAccountQuantity()+acc.getAccountQuantity());
             }
-            if(account!=null)
+            if(account!=null) {
 
                 accountRepo.save(account);
+            }
+        }else {
+        	account = new Account();
+        	account.setPassengerId("Enter Details");
+        }
+        if(account==null) {
+        	account = new Account();
+        	account.setPassengerId("Enter Details");
         }
         return account;
     }
@@ -148,9 +167,20 @@ private final static String ACCOUNT_SID = "ACb973d8209fc075d129ff421383aec6b1";
         Account account= null;
         if(codeToCheck==validation){
             account = accountRepo.findAccountByPassengerId(acc.getPassengerId());
-            account.setAccountQuantity(acc.getAccountQuantity()+account.getAccountQuantity());
-            accountRepo.save(account);
+            if(account!=null) {
+	            account.setAccountQuantity(acc.getAccountQuantity()+account.getAccountQuantity());
+	            accountRepo.save(account);
+            }
+            else {
+            	account = new Account();
+            	account.setPassengerId("No Such Passenger");
+            }
         }
+        if(account==null) {
+        	account= new Account();
+        	account.setPassengerId("Code Invalid or Passenger non exist");
+        }
+        
         return account;
     }
 
