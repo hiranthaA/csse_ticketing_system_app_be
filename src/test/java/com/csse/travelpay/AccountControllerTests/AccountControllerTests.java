@@ -95,16 +95,16 @@ public class AccountControllerTests extends TravelpayApplicationTests{
     * Service Test for get all accounts
     * @throws Exception
     */
-   @Test
-   public void getAccountByIdTest() throws Exception{
-        account.setPassengerId(passenngerId );
-        account.setAccountQuantity(amountInitial);
-        this.mockMvc.perform(get("/accounts/getbyid/?id="+passenngerId)).andDo(print())
-                   .andExpect(status().isOk())
-                   .andExpect(content().contentType("application/json;charset=UTF-8"))
-                   .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
-                   .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
-   }
+//   @Test
+//   public void getAccountByIdTest() throws Exception{
+//        account.setPassengerId(passenngerId );
+//        account.setAccountQuantity(amountInitial);
+//        this.mockMvc.perform(get("/accounts/getbyid/?id="+passenngerId)).andDo(print())
+//                   .andExpect(status().isOk())
+//                   .andExpect(content().contentType("application/json;charset=UTF-8"))
+//                   .andExpect(jsonPath("$.passengerId").value(account.getPassengerId()))
+//                   .andExpect(jsonPath("$.accountQuantity").value(amountInitial));
+//   }
    
   
 
