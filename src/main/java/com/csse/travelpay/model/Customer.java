@@ -5,7 +5,10 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+//document name
 @Document(collection="customer")
+
+//model
 public class Customer {
 	
 	@Id

@@ -6,6 +6,6 @@ public interface CustomerService {
 	
 	Customer addCustomer(Customer c);
 
-	Customer getUser(String id);
+	Customer getUser(String email);
 
 }
